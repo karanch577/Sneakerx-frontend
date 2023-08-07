@@ -16,6 +16,7 @@ function Home() {
           <h2 className="text-[20px] md:text-[24px] font-[500] my-6">The Collections</h2>
           <div className="flex overflow-auto gap-2 md:gap-7 mb-5">
             {categoryList?.length > 0 && categoryList.map(category => <CategoryCard key={category._id} category={category} />)}
+            
          </div>
         </div>
         {/* Category grid end */}
