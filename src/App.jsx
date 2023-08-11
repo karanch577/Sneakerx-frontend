@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import appStore from "./redux/appStore.js";
 import Category from "./pages/Category.jsx";
 import Product from "./pages/Product.jsx";
+import Cart from "./pages/Cart.jsx";
 
 const Layout = () => {
   return (
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <Product />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "*",

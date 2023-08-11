@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Container from "../components/Container";
 import CategoryCard from "../components/CategoryCard";
 import ProductCard from "../components/ProductCard";
