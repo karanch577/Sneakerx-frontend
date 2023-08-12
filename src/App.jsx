@@ -11,6 +11,7 @@ import appStore from "./redux/appStore.js";
 import Category from "./pages/Category.jsx";
 import Product from "./pages/Product.jsx";
 import Cart from "./pages/Cart.jsx";
+import Checkout from "./pages/Checkout.jsx";
 
 const Layout = () => {
   return (
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
       {
         path: "*",

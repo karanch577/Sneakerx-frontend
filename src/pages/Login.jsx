@@ -2,7 +2,7 @@ import React from 'react'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { FcGoogle } from "react-icons/fc"
 import { BsApple } from "react-icons/bs"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import { useDispatch } from 'react-redux'
 import { BASE_URL } from "../utils/constants"
@@ -18,6 +18,11 @@ export function Login() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams();
+
+  // Access the value of the 'checkout' query parameter
+  const checkout = searchParams.get('checkout');
+  console.log(checkout)
 
   const onSubmit = async (inputFields) => {
     try {
@@ -35,7 +40,11 @@ export function Login() {
       if(data.success) {
         dispatch(setUser(data.user))
         localStorage.setItem("isLoggedId", true)
-        navigate("/")
+        if(checkout) {
+          navigate("/checkout")
+        }else {
+          navigate("/")
+        }
       }
     } catch (error) {
       console.log(error)
