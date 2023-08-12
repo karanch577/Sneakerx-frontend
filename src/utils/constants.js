@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://sneakerx-backend.onrender.com/api/'
+export const BASE_URL = 'https://sneakerx-backend.onrender.com/api'
