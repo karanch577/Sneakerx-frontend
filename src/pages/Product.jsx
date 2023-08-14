@@ -9,6 +9,7 @@ import { AiOutlineHeart } from "react-icons/ai"
 import RelatedProducts from "../components/RelatedProducts";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
+import ProductSimmer from "../components/ProductSimmer";
 
 function Product() {
   const [sizeSelected, setSizeSelected] = useState(null)
@@ -17,7 +18,7 @@ function Product() {
   const product = useFetchProduct(id);
   const dispatch = useDispatch()
 
-  if(product === null) return <>simmer ui</>
+  if(product === null) return <ProductSimmer />
 
   const discount = Math.floor(((product.price - product.sellingPrice) / product.price) * 100);
 
