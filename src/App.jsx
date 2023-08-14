@@ -15,8 +15,8 @@ import Checkout from "./pages/Checkout.jsx";
 import axios from "axios";
 import UserDashboard from "./pages/UserDashboard.jsx";
 
-axios.defaults.baseURL = "http://localhost:4001/api"
-// axios.defaults.baseURL = "https://sneakerx-backend.onrender.com/api"
+// axios.defaults.baseURL = "http://localhost:4001/api"
+axios.defaults.baseURL = "https://sneakerx-backend.onrender.com/api"
 axios.defaults.withCredentials = true
 
 const Layout = () => {
