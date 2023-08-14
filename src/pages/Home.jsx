@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "../components/Container";
 import CategoryCard from "../components/CategoryCard";
 import ProductCard from "../components/ProductCard";
 import useFetchList from "../utils/useFetchList";
+import { useDispatch } from "react-redux";
+import { addCategoryList } from "../redux/navSlice";
 
 function Home() {
  const productList = useFetchList("product/list?page=1&limit=9").products
  const categoryList = useFetchList("category/all").collections
+ const dispatch = useDispatch()
+
+ useEffect(() => {
+  if(categoryList) {
+    dispatch(addCategoryList(categoryList))
+   }
+ }, [categoryList?.length])
+
+ 
 
   return (
     <div>
@@ -17,7 +28,7 @@ function Home() {
           <div className="flex overflow-auto gap-2 md:gap-7 mb-5">
           {!categoryList && <div className="flex overflow-auto gap-2 md:gap-7 mb-5">
             {/* simmer ui start */}
-              {[...Array(3)].map(el => <div className="bg-[#F6F6F6] h-[140px] md:h-[360px] min-w-[9rem] w-[33vw]"></div>)}
+              {[...Array(3)].map((el, i) => <div key={i} className="bg-[#F6F6F6] h-[140px] md:h-[360px] min-w-[9rem] w-[33vw]"></div>)}
               {/* simmer ui end */}
             </div>  }
 
@@ -33,7 +44,7 @@ function Home() {
         <h2 className="text-[20px] md:text-[24px] font-[500] mt-6">Latest Releases</h2>
         <div className="flex flex-wrap justify-between mb-10">
           {/* simmer ui start */}
-          {!productList && [...Array(9)].map(el => <div className="w-[49%] md:w-[32%] bg-[#F6F6F6] h-[200px] min-[500px]:h-[250px] sm:h-[350px] mt-4"></div>)}
+          {!productList && [...Array(9)].map((el, i) => <div className="w-[49%] md:w-[32%] bg-[#F6F6F6] h-[200px] min-[500px]:h-[250px] sm:h-[350px] mt-4" key={i}></div>)}
           {/* simmer ui end */}
 
           {productList?.map((product) => <ProductCard key={product._id} product={product}/>)}

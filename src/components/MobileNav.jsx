@@ -10,6 +10,7 @@ import { removeUser } from "../redux/userSlice";
 function MobileNav() {
   const mobileScreen = useSelector((store) => store.navbar.mobileScreen);
   const user = useSelector(store => store.user.user)
+  const categoryList = useSelector(store => store.navbar.categoryList)
 
   const dispatch = useDispatch();
 
@@ -56,13 +57,16 @@ function MobileNav() {
           >
             About <GrNext className="text-xl" />
           </Link>
+          {categoryList?.length > 0 && categoryList?.map((el, i) =>
           <Link
+            key={i}
             onClick={toggleNav}
             className="font-[500] text-[24px] cursor-pointer flex items-center justify-between"
-            to="/categories"
+            to={`/category/${el._id}`}
           >
-            Categories <GrNext className="text-xl" />
+            {el.name} <GrNext className="text-xl" />
           </Link>
+          )}
           <Link
             onClick={toggleNav}
             className="font-[500] text-[24px] cursor-pointer flex items-center justify-between"
