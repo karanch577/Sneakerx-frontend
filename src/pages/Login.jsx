@@ -5,8 +5,8 @@ import { BsApple } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import { useDispatch } from 'react-redux'
-import { BASE_URL } from "../utils/constants"
 import { setUser } from '../redux/userSlice'
+import axios from 'axios'
 
 
 export function Login() {
@@ -22,19 +22,12 @@ export function Login() {
 
   // Access the value of the 'checkout' query parameter
   const checkout = searchParams.get('checkout');
-  console.log(checkout)
 
   const onSubmit = async (inputFields) => {
     try {
-      const res = await fetch(`${BASE_URL}/user/signin`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(inputFields)
-      })
+      const res = await axios.post(`/user/signin`, inputFields)
 
-      const data = await res.json()
+      const data = res.data
 
       // save the user in the store
       if(data.success) {

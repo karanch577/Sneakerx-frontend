@@ -1,5 +1,5 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { BASE_URL } from "./constants";
 
 const useFetchList = (api) => {
     const [list, setList] = useState([])
@@ -7,9 +7,8 @@ const useFetchList = (api) => {
     const fetchData = async () => {
         if(api) {
         try {
-       const res = await fetch(`${BASE_URL}/${api}`)
-
-       const data = await res.json()
+            const response = await axios.get(`/${api}`);
+            const data = response.data;
 
         if(data.success) {
             setList(data)

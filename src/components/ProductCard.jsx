@@ -8,6 +8,8 @@ function ProductCard({ product }) {
   const discount = Math.floor(((price - sellingPrice) / price) * 100);
   return (
     <Link to={`/product/${product._id}`} className="w-[49%] md:w-[32%] mt-4">
+      {/* simmer ui */}
+      {!product && <div className="w-full h-[300px]"></div>}
       <div className="img aspect-square">
         <img className="object-cover w-full h-full" src={photos[0].secure_url} alt={name} />
       </div>

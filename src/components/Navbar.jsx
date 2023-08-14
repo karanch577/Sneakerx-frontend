@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "/logo.svg";
 import { Link } from "react-router-dom";
 
 import { BsHeart, BsCart } from "react-icons/bs";
 import { IoSearchOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { AiOutlineUser } from "react-icons/ai"
+import { GrNext } from "react-icons/gr";
+
 import NavIconWrapper from "./NavIconWrapper";
 import Container from "./Container";
 import MobileNav from "./MobileNav";
@@ -13,17 +14,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { showMobileNav } from "../redux/navSlice";
 
 import { GrDown } from "react-icons/gr"
+import { IoMdArrowDropdown } from "react-icons/io"
+import axios from "axios";
+import { removeUser } from "../redux/userSlice";
 
 const handleForm = (e) => {
   e.preventDefault();
 };
 
 function Navbar() {
+  const [isSecNavOpen, setIsSecNavOpen] = useState(false)
   const mobileScreen = useSelector((store) => store.navbar.mobileScreen)
   const dispatch = useDispatch()
 
   const user = useSelector((store) => store.user.user)
   const cart = useSelector(store => store.cart.cartItems)
+
+  const handleLogout = async () => {
+    try {
+      const { data } = await axios.get("/user/signout")
+      if(data.success) {
+        dispatch(removeUser())
+        setIsSecNavOpen(prev => !prev)
+      }
+    } catch (error) {
+      console.log("Error in signout")
+      console.log(error)
+    }
+  
+  }
 
   return (
     <>
@@ -64,20 +83,30 @@ function Navbar() {
           </NavIconWrapper>
           </Link>
 
-          {user ? <Link to="/profile">
-          <NavIconWrapper visibility="hidden sm:block">
-            <AiOutlineUser />
-          </NavIconWrapper>
-          </Link> :
+          <div className="relative">
+          {user ? <div className="hidden sm:block">
+            <button onClick={() => setIsSecNavOpen(prev => !prev)} className="flex items-center text-lg">{user.name.split(" ")[0]}<IoMdArrowDropdown className={`text-2xl relative top-[1px] transition ${isSecNavOpen ? "rotate-180" : "rotate-0"}`} /></button>
+          </div> :
           <Link className="hidden sm:block bg-black text-white rounded py-0.5 px-3 mx-2" to='/login'>Sign In</Link>
           }
-          
+
+          {/* secondary nav start */}
+          {isSecNavOpen && 
+            <div className="absolute right-2 flex flex-col gap-2 bg-gray-300 rounded w-[10rem] z-40 py-5 px-3 mt-2">
+              <Link onClick={() => setIsSecNavOpen(prev => !prev)} to="/user/profile" className="flex items-center justify-between">Profile <GrNext /></Link>
+              <Link onClick={() => setIsSecNavOpen(prev => !prev)} to="/user/orders" className="flex items-center justify-between">Orders <GrNext /></Link>
+              <Link onClick={handleLogout} className="flex items-center justify-between">Logout <GrNext /></Link>
+            </div>
+          }
+          {/* secondary nav end */}
+          </div>
           
           <div onClick={() => {dispatch(showMobileNav())}}>
           <NavIconWrapper visibility="sm:hidden">
             <RxHamburgerMenu />
           </NavIconWrapper>
           </div>
+
         </div>
       </div>
 

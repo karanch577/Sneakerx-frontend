@@ -2,9 +2,9 @@ import React from 'react'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from 'react-router-dom'
-import { BASE_URL } from "../utils/constants"
 import { useDispatch } from 'react-redux'
 import { setUser } from '../redux/userSlice'
+import axios from 'axios'
 
 function Register() {
   const {
@@ -18,15 +18,9 @@ function Register() {
 
   const onSubmit = async (inputFields) => {
     try {
-      const res = await fetch(`${BASE_URL}/user/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(inputFields)
-      })
+      const res = await axios.post(`/user/signup`, inputFields)
 
-      const data = await res.json()
+      const data = res.data
 
       // save the user in the store
       if(data.success) {

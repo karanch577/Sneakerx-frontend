@@ -2,8 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Container from "../components/Container";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { BASE_URL } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { emptyCart } from "../redux/cartSlice";
 
 function Checkout() {
   const [address, setAddress] = useState("");
@@ -11,6 +12,7 @@ function Checkout() {
   const [paymentRes, SetPaymentRes] = useState(null);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const user = useSelector((store) => store.user.user);
   const cart = useSelector((store) => store.cart.cartItems);
   const appliedCoupon = useSelector((store) => store.cart.appliedCoupon);
@@ -33,29 +35,9 @@ function Checkout() {
         phoneNumber,
       };
       try {
-        // Get key
-        let key;
-        const response = await fetch(`${BASE_URL}/order/getkey`);
-        const data = await response.json();
-        key = data.key;
 
-        // Perform checkout
-        let order, userOrderId;
-
-        const response1 = await fetch(`${BASE_URL}/order/checkout`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataToSend),
-        });
-        const data1 = await response1.json();
-        order = data1.order;
-        userOrderId = data1.userOrderId;
-
-        // const {
-        //   data: { order, userOrderId },
-        // } = await axios.post("/order/checkout", dataToSend);
+        const {data: {key}} = await axios.get("/order/getkey")
+        const {data: {order, userOrderId}} = await axios.post("/order/checkout", dataToSend)
 
         const options = {
           key,
@@ -76,8 +58,8 @@ function Checkout() {
               .catch((err) => console.log(err));
           },
           prefill: {
-            name: user.user.name,
-            email: "gaurav.kumar@example.com",
+            name: user.name,
+            email: user.email,
             contact: "9000090000",
           },
           notes: {
@@ -104,6 +86,7 @@ function Checkout() {
 
     if (paymentRes?.success) {
       navigate("/user/orders");
+      dispatch(emptyCart())
     }
   }, [paymentRes]);
 
