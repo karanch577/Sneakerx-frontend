@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/category/:name",
+        path: "/category/:id",
         element: <Category />,
       },
       {

@@ -30,7 +30,7 @@ function Navbar() {
 
   const user = useSelector((store) => store.user.user);
   const cart = useSelector((store) => store.cart.cartItems);
-  const categoryList = useSelector((store) => store.navbar.categoryList)
+  const categoryList = useFetchList("category/all").collections
 
 
 
@@ -67,13 +67,13 @@ function Navbar() {
         </div>
         <div className="hidden sm:flex items-center gap-6 relative min-[900px]:left-16">
           <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
+          <p className="cursor-pointer">About</p>
           <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="relative">
             <p className="cursor-pointer flex items-center gap-1">
               Categories <GrDown className={`transition ${isHover && "rotate-180"}`} />
             </p>
             {isHover && 
-            <div className="absolute top-6 w-[10rem]">
+            <div className="absolute top-6 w-[10rem] -left-4">
               {categoryList.map((category) => <Link to={`/category/${category._id}`} className="my-1 hover:bg-gray-100 rounded cursor-pointer inline-block px-2" key={category._id}>{category.name}</Link>)}
             </div>}
           </div>

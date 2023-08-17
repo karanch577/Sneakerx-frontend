@@ -3,19 +3,11 @@ import Container from "../components/Container";
 import CategoryCard from "../components/CategoryCard";
 import ProductCard from "../components/ProductCard";
 import useFetchList from "../utils/useFetchList";
-import { useDispatch } from "react-redux";
-import { addCategoryList } from "../redux/navSlice";
 
 function Home() {
  const productList = useFetchList("product/list?page=1&limit=9").products
  const categoryList = useFetchList("category/all").collections
- const dispatch = useDispatch()
 
- useEffect(() => {
-  if(categoryList) {
-    dispatch(addCategoryList(categoryList))
-   }
- }, [categoryList?.length])
 
  
 
