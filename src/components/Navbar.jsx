@@ -7,9 +7,9 @@ import { IoSearchOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GrNext } from "react-icons/gr";
 
-import NavIconWrapper from "./NavIconWrapper";
-import Container from "./Container";
-import MobileNav from "./MobileNav";
+import NavIconWrapper from "./NavIconWrapper.jsx";
+import Container from "./Container.jsx";
+import MobileNav from "./MobileNav.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { addCategoryList, showMobileNav } from "../redux/navSlice";
 

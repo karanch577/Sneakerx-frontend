@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
-import Container from './Container';
+import Container from './Container.jsx';
 
 function Footer() {
   return (

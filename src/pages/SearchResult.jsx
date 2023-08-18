@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import CategoryCard from '../components/CategoryCard';
-import SearchResultProduct from '../components/searchResultProduct';
+import CategoryCard from '../components/CategoryCard.jsx';
+import SearchResultProduct from '../components/SearchResultProduct.jsx';
 
 function SearchResult() {
     const result = useSelector(store => store.search.searchResult)
