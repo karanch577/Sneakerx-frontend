@@ -14,6 +14,7 @@ import Cart from "./pages/Cart.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import axios from "axios";
 import UserDashboard from "./pages/UserDashboard.jsx";
+import SearchResult from "./pages/SearchResult.jsx";
 
 // axios.defaults.baseURL = "http://localhost:4001/api"
 axios.defaults.baseURL = "https://sneakerx-backend.onrender.com/api"
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/user/:subpage",
         element: <UserDashboard />,
+      },
+      {
+        path: "/searchResult",
+        element: <SearchResult />,
       },
       {
         path: "*",

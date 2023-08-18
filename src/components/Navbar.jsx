@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logo from "/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { BsHeart, BsCart } from "react-icons/bs";
 import { IoSearchOutline } from "react-icons/io5";
@@ -11,27 +11,32 @@ import NavIconWrapper from "./NavIconWrapper";
 import Container from "./Container";
 import MobileNav from "./MobileNav";
 import { useDispatch, useSelector } from "react-redux";
-import { showMobileNav } from "../redux/navSlice";
+import { addCategoryList, showMobileNav } from "../redux/navSlice";
 
 import { GrDown } from "react-icons/gr";
 import { IoMdArrowDropdown } from "react-icons/io";
 import axios from "axios";
 import { removeUser } from "../redux/userSlice";
-import useFetchList from "../utils/useFetchList"
+import useFetchList from "../utils/useFetchList";
+import { addSearchResult } from "../redux/searchSlice";
 
-const handleForm = (e) => {
-  e.preventDefault();
-};
 
 function Navbar() {
   const [isSecNavOpen, setIsSecNavOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("")
   const [isHover, setIsHover] = useState(false)
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const user = useSelector((store) => store.user.user);
   const cart = useSelector((store) => store.cart.cartItems);
   const categoryList = useFetchList("category/all").collections
 
+  
+  useEffect(() => {
+    dispatch(addCategoryList(categoryList))
+    
+  }, [categoryList?.length])
 
 
   const handleLogout = async () => {
@@ -56,6 +61,24 @@ function Navbar() {
     setIsHover(false);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if(inputValue){
+    try {
+      const res = await axios.get(`/product/search?q=${inputValue}`)
+
+      if(res.data.success){
+        dispatch(addSearchResult(res.data.products))
+        setInputValue("")
+      }
+    } catch (error) {
+      console.log(error.message)
+    } finally {
+      navigate("/searchResult")
+    }
+    }
+  }
+
 
   return (
     <>
@@ -77,11 +100,11 @@ function Navbar() {
               {categoryList.map((category) => <Link to={`/category/${category._id}`} className="my-1 hover:bg-gray-100 rounded cursor-pointer inline-block px-2" key={category._id}>{category.name}</Link>)}
             </div>}
           </div>
-          <Link to="/contact">Contact</Link>
+          <p className="cursor-pointer">Contact</p>
         </div>
         <div className="right flex items-center gap-3">
           <form
-            onSubmit={handleForm}
+            onSubmit={handleSubmit}
             className="hidden min-[900px]:flex items-center gap-0 bg-gray-100 hover:bg-gray-200 rounded-3xl py-0.5"
           >
             <NavIconWrapper>
@@ -91,6 +114,8 @@ function Navbar() {
               className="bg-transparent border-none outline-none w-[140px]"
               type="text"
               placeholder="Search"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
             />
           </form>
 
@@ -98,9 +123,7 @@ function Navbar() {
             <NavIconWrapper visibility="hidden min-[900px]:block">
               <BsHeart />
             </NavIconWrapper>
-            <NavIconWrapper visibility="min-[900px]:hidden">
-              <IoSearchOutline />
-            </NavIconWrapper>
+            
 
             <Link to="/cart">
               <NavIconWrapper>
@@ -176,11 +199,21 @@ function Navbar() {
                 <RxHamburgerMenu />
               </NavIconWrapper>
             </div>
+
           </div>
         </div>
 
         <MobileNav />
       </Container>
+      {/* mobile search input */}
+      <form onSubmit={handleSubmit} className="flex items-center gap-2 px-5 min-[900px]:hidden">
+            <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="border w-full px-2 rounded py-0.5" type="text" placeholder="Search"/>
+            <button>
+            <IoSearchOutline className="text-2xl"/>
+            </button>
+
+      </form>
+      {/* mobile search input end */}
     </>
   );
 }
