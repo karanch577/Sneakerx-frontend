@@ -14,6 +14,8 @@ export function Login() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
+    clearErrors
   } = useForm()
 
   const dispatch = useDispatch()
@@ -39,6 +41,9 @@ export function Login() {
         }
       }
     } catch (error) {
+      if(error.response && error.response.status === 400){
+        setError("authError", {message: "Email and password doesn't match"})
+      }
       console.log(error)
     }
   }
@@ -59,7 +64,8 @@ export function Login() {
               Create a free account
             </Link>
           </p>
-          <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
+          <form className="mt-7" onSubmit={handleSubmit(onSubmit)}>
+            {errors.authError && <p className='text-[13px] mb-2 text-red-500'>{errors.authError.message}</p>}
             <div className="space-y-5">
               <div>
                 <label htmlFor="email" className="text-base font-medium text-gray-900">
@@ -73,6 +79,7 @@ export function Login() {
                     placeholder="Email"
                     id='email'
                     {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                    onChange={() => clearErrors("authError")}
                    />
                    {errors.email && <p className='text-red-500 text-[13px]'>Enter a valid email</p>}
                 </div>
@@ -83,10 +90,10 @@ export function Login() {
                     {' '}
                     Password{' '}
                   </label>
-                  <a href="#" title="" className="text-sm font-semibold text-black hover:underline">
+                  <Link to="/forgotPassword" className="text-sm font-semibold text-black hover:underline">
                     {' '}
                     Forgot password?{' '}
-                  </a>
+                  </Link>
                 </div>
                 <div className="mt-2">
                   <input
@@ -95,6 +102,7 @@ export function Login() {
                     placeholder="Password"
                     id='password'
                     {...register("password", { required: true, minLength: 6 })}
+                    onChange={() => clearErrors("authError")}
                    />
                    {errors.password && <p className='text-red-500 text-[13px]'>Password must be at least 6 character long</p>}
                 </div>

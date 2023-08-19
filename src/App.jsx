@@ -15,9 +15,11 @@ import Checkout from "./pages/Checkout.jsx";
 import axios from "axios";
 import UserDashboard from "./pages/UserDashboard.jsx";
 import SearchResult from "./pages/SearchResult.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 
-// axios.defaults.baseURL = "http://localhost:4001/api"
-axios.defaults.baseURL = "https://sneakerx-backend.onrender.com/api"
+axios.defaults.baseURL = "http://localhost:4001/api"
+// axios.defaults.baseURL = "https://sneakerx-backend.onrender.com/api"
 axios.defaults.withCredentials = true
 
 const Layout = () => {
@@ -70,6 +72,14 @@ const router = createBrowserRouter([
       {
         path: "/searchResult",
         element: <SearchResult />,
+      },
+      {
+        path: "/forgotPassword",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/resetPassword/:resetToken",
+        element: <ResetPassword />,
       },
       {
         path: "*",
