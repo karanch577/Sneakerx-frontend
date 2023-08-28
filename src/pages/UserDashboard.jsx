@@ -67,7 +67,6 @@ function UserDashboard() {
             </button>
           </aside>
           <main className="sm:ml-[20px] w-full sm:w-[calc(100%-250px)]">
-            {console.log(subpage)}
             {subpage === "profile" && <UserProfile />}
             {subpage === "orders" && <UserOrders />}
           </main>

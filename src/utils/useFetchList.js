@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const useFetchList = (api) => {
     const [list, setList] = useState([])
+    const isOrderCancelled = useSelector(store => store.user.isOrderCancelled)
 
     const fetchData = async () => {
         if(api) {
@@ -22,7 +24,7 @@ const useFetchList = (api) => {
 
     useEffect(() => {
         fetchData()
-    },[])
+    },[isOrderCancelled])
 
     return list;
 }

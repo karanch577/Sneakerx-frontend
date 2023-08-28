@@ -4,7 +4,8 @@ const userSlice = createSlice({
     name: "user",
     initialState: {
         user: null,
-        orders: []
+        orders: [],
+        isOrderCancelled: false
     },
     reducers: {
         setUser: (state, action) => {
@@ -15,10 +16,13 @@ const userSlice = createSlice({
         },
         setOrders: (state, action) => {
             state.orders = action.payload
+        },
+        cancelOrder: (state) => {
+            state.isOrderCancelled = !state.isOrderCancelled
         }
     }
 })
 
-export const { setUser, removeUser, setOrders } = userSlice.actions
+export const { setUser, removeUser, setOrders, cancelOrder } = userSlice.actions
 
 export default userSlice.reducer

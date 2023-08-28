@@ -13,7 +13,7 @@ This is an e-commerce application built using the MERN stack - MongoDB, Express,
 ### User: 
 email - iwebtrends@gmail.com <br>
 password - 123123
-login page - [click here](https://phonezone.vercel.app/login)
+login page - [click here](https://sneakerx-karan.netlify.app/login)
 
 ## Technologies
 This project was built using the following technologies:

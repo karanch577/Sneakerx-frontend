@@ -71,6 +71,10 @@ const router = createBrowserRouter([
         element: <UserDashboard />,
       },
       {
+        path: "/user/:subpage/:subpage2",
+        element: <UserDashboard />,
+      },
+      {
         path: "/searchResult",
         element: <SearchResult />,
       },
