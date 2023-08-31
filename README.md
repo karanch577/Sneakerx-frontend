@@ -6,7 +6,7 @@ This is an e-commerce application built using the MERN stack - MongoDB, Express,
 
 ### [Live Link](https://sneakerx-karan.netlify.app)
 
-### This is the backend repository of the project. You can find the frontend of this project [here](https://github.com/karanch577/Sneakerx-backend).
+### This is the frontend repository of the project. You can find the backend of this project [here](https://github.com/karanch577/Sneakerx-backend).
 
 ## Demo Users
 
