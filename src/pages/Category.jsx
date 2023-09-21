@@ -29,9 +29,9 @@ const { id } = useParams()
   const handleSort = async (e) => {
     let api = `category/products/${id}`
     if(e.target.innerText?.includes("High-Low")){
-      api = `${api}?pricing=desc`
+      api = `${api}/?pricing=desc`
     } else if(e.target.innerText?.includes("Low-High")){
-      api = `${api}?pricing=asc`
+      api = `${api}/?pricing=asc`
     }
     
     const res = await axios.get(api)
@@ -51,7 +51,7 @@ const { id } = useParams()
               <div onClick={handleToggle} className='relative text-base flex items-center gap-2 cursor-pointer'>
                 Sort By<GrDown className={`transition ${showSortItem && "rotate-180"}`} />
                 {showSortItem && 
-                <div className='absolute top-6 bg-white -left-2 p-2 rounded w-36'>
+                <div className='absolute top-6 bg-white -left-12 p-2 rounded w-36'>
                 <p onClick={handleSort} className='cursor-pointer hover:opacity-50'>Newest</p>
                 <p onClick={handleSort} className='cursor-pointer hover:opacity-50'>Price: High-Low</p>
                 <p onClick={handleSort} className='cursor-pointer hover:opacity-50'>Price: Low-High</p>

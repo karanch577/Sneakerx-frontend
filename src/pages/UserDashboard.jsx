@@ -43,10 +43,10 @@ function UserDashboard() {
 
   return (
     <div>
-      <Container className={``}>
-        <div className="px-4 max-w-6xl mt-6 sm:mt-4 mx-auto sm:flex">
+      <Container>
+        <div className="px-4 max-w-6xl mt-6 sm:mt-4 mx-auto sm:flex min-h-[60vh]">
           {/* only for small screen */}
-          <section className="sm:hidden">
+          <section className="sm:hidden my-6">
             <Link className={linkClasses("profile")} to={"/user/profile"}>
               Profile
             </Link>
@@ -55,7 +55,7 @@ function UserDashboard() {
             </Link>
           </section>
 
-          <aside className="w-[200px] hidden sm:flex flex-col rounded p-[2px] bg-white h-[60vh] border">
+          <aside className="w-[200px] hidden sm:flex flex-col rounded p-[2px] bg-white h-auto border">
             <Link className={linkClasses("profile")} to={"/user/profile"}>
               Profile
             </Link>

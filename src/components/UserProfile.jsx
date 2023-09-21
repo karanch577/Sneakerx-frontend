@@ -9,10 +9,8 @@ import axios from 'axios'
 
 function UserProfile() {
   const [showEditName, setShowEditName] = useState(false)
-  const [showEditEmail, setShowEditEmail] = useState(false)
 
   const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
 
   const {subpage2} = useParams()
   const user = useSelector(store => store.user.user)
@@ -52,28 +50,9 @@ function UserProfile() {
     
   }
 
-  const handleEmailChange = async (e) => {
-    if(!email) {
-      setShowEditName(false)
-    }
-
-    try {
-      const { data } = await axios.patch("/user/profile/update", {
-        property: "email",
-        value: email
-      })
-      if(data.success) {
-        dispatch(setUser(data.user))
-        setShowEditEmail(false)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-    
-  }
   
   return (
-    <div className='p-3 text-lg w-9/12'>
+    <div className='p-3 text-lg md:w-9/12'>
         <div className='py-1'>
         Name:
           {showEditName ? <div className='flex justify-between items-center gap-8'>
@@ -85,12 +64,7 @@ function UserProfile() {
         </div>
 
         <div className='py-1 mb-4'>Email:
-        {showEditEmail ? <div className='flex justify-between items-center gap-8'>
-            <input className='border w-full border-black' type="email" onChange={(e) => setEmail(e.target.value)} defaultValue={user?.email} placeholder="Enter the email" />
-            <MdDownloadDone className='text-2xl' onClick={handleEmailChange}/>
-          </div> 
-          :
-          <div className="flex justify-between items-center">{user?.email}<span onClick={() => setShowEditEmail(true)}><AiOutlineEdit className='text-2xl cursor-pointer' /></span></div>}
+            <div className='w-full'>{user?.email}</div>
         </div>
 
         <Link className='bg-black text-white px-3 py-1 rounded' to="changePassword">Change password</Link>

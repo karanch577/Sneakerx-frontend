@@ -49,7 +49,7 @@ function Cart() {
     <div>
       <Container>
         {cart.length === 0 ? (
-          <div className="flex-[2] pt-36 flex flex-col items-center pb-[50px] md:-mt-14">
+          <div className="flex-[2] pt-36 flex flex-col items-center pb-[50px] md:-mt-14 mb-12">
             <img
               src="/empty-cart.jpg"
               width={300}

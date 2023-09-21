@@ -78,10 +78,9 @@ export function Login() {
                     type="email"
                     placeholder="Email"
                     id='email'
-                    {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-                    onChange={() => clearErrors("authError")}
+                    {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })}
                    />
-                   {errors.email && <p className='text-red-500 text-[13px]'>Enter a valid email</p>}
+                   {errors?.email?.type === "required" && <p className='text-red-500 text-[13px]'>Enter a valid email</p>}
                 </div>
               </div>
               <div>
@@ -102,9 +101,8 @@ export function Login() {
                     placeholder="Password"
                     id='password'
                     {...register("password", { required: true, minLength: 6 })}
-                    onChange={() => clearErrors("authError")}
                    />
-                   {errors.password && <p className='text-red-500 text-[13px]'>Password must be at least 6 character long</p>}
+                   {errors?.password?.type === "required" && <p className='text-red-500 text-[13px]'>Password must be at least 6 character long</p>}
                 </div>
               </div>
               <div>
