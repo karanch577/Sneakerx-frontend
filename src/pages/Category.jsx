@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Container from "../components/Container"
 import useFetchList from '../utils/useFetchList'
 import { useParams } from 'react-router-dom'
@@ -11,7 +11,8 @@ import axios from 'axios'
 function Category() {
   const [showSortItem, setShowSortItem] = useState(false)
   const [productList, setProductList] = useState([])
-const { id } = useParams()
+  const sortRef = useRef()
+  const { id } = useParams()
   const categoryList = useFetchList("category/all").collections
   const category = categoryList?.filter(el => el._id === id)
 
@@ -38,17 +39,33 @@ const { id } = useParams()
     setProductList(res.data.products)
     console.log(productList)
   }
+
+  // hiding the sort items when user click outside of the container
+
+  const handleOutsideClick = (e) => {
+    if(sortRef.current && !sortRef.current.contains(e.target)) {
+      setShowSortItem(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick)
+
+    // clean up function - removing the event listener when the component unmount
+    return () => {
+      document.removeEventListener("click", handleOutsideClick)
+    }
+  }, [])
   
   return (
     <div>
       <Container className="px-4 sm:px-6 xl:px-2">
-        <div className="left"></div>
-        <div className="right ">
+        <div>
           {productList?.length > 0 ? 
           <div>
             <div className='text-2xl font-[500] mt-8 mb-2 flex justify-between'>
               <h2>{category?.length > 0 && category[0]?.name}</h2>
-              <div onClick={handleToggle} className='relative text-base flex items-center gap-2 cursor-pointer'>
+              <div ref={sortRef} onClick={handleToggle} className='relative text-base flex items-center gap-2 cursor-pointer'>
                 Sort By<GrDown className={`transition ${showSortItem && "rotate-180"}`} />
                 {showSortItem && 
                 <div className='absolute top-6 bg-white -left-12 p-2 rounded w-36'>
