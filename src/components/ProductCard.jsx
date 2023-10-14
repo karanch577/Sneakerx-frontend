@@ -6,8 +6,17 @@ function ProductCard({ product }) {
 
   // calculating the discount
   const discount = Math.floor(((price - sellingPrice) / price) * 100);
+
+  const scrollToTop = () => {
+    // setting the behaviour to smooth - when clicked on the related products - else normal
+      window.scrollTo({
+        top: 0,
+        behavior: window.location.pathname.includes("/product") ? "smooth" : "instant"
+      })
+  }
+
   return (
-    <Link to={`/product/${product._id}`} className="w-[49%] md:w-[32%] mt-4">
+    <Link to={`/product/${product._id}`} onClick={scrollToTop} className="w-[49%] md:w-[32%] mt-4">
       {/* simmer ui */}
       {!product && <div className="w-full h-[300px]"></div>}
       <div className="img aspect-square">

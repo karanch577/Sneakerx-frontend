@@ -36,7 +36,7 @@ function Home() {
         <h2 className="text-[20px] md:text-[24px] font-[500] mt-6">Latest Releases</h2>
         <div className="flex flex-wrap justify-between mb-10">
           {/* simmer ui start */}
-          {!productList && [...Array(9)].map((el, i) => <div className="w-[49%] md:w-[32%] bg-[#F6F6F6] h-[200px] min-[500px]:h-[250px] sm:h-[350px] mt-4" key={i}></div>)}
+          {!productList && [...Array(9)].map((_el, i) => <div className="w-[49%] md:w-[32%] bg-[#F6F6F6] h-[200px] min-[500px]:h-[250px] sm:h-[350px] mt-4" key={i}></div>)}
           {/* simmer ui end */}
 
           {productList?.map((product) => <ProductCard key={product._id} product={product}/>)}

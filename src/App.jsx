@@ -19,7 +19,6 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 
 // axios.defaults.baseURL = "http://localhost:4001/api"
-// axios.defaults.baseURL = "https://iwebtrends.com/api"
 axios.defaults.baseURL = "https://sneakerx-backend.onrender.com/api"
 axios.defaults.withCredentials = true
 
