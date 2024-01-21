@@ -70,8 +70,8 @@ function Cart() {
             </Link>
           </div>
         ) : (
-          <div className="flex mt-16 mx-28 gap-10 mb-5">
-            <div className="left w-8/12 mb-6">
+          <div className="flex flex-col md:flex-row mt-16 mx-5 sm:mx-10 md:mx-28 gap-10 mb-5">
+            <div className="left w-full md:w-8/12 mb-6">
               <h2 className="text-2xl font-[500] mb-2">Bag</h2>
               {cart.length > 0 &&
                 cart.map((item) => (
@@ -79,7 +79,7 @@ function Cart() {
                 ))}
             </div>
 
-            <div className="right w-4/12">
+            <div className="right w-full md:w-4/12">
               <h2 className="text-2xl font-[500] mb-6">Summary</h2>
               <div className="flex justify-between border-b-2 pb-2">
                 <h3>Subtotal</h3>
