@@ -66,7 +66,7 @@ function Product() {
           incl. of taxes
         </p>
         <p className="text-md font-medium text-black/[0.5] mb-20">
-          Also includes all applicable duties)
+          (Also includes all applicable duties)
         </p>
         {/* pricing end */}
 
@@ -79,7 +79,7 @@ function Product() {
 
           {/* size grid start */}
           <ul className="flex flex-wrap justify-between my-2">
-          {product.sizes?.map(obj => <li key={obj._id} onClick={() => setSizeSelected(obj.size)} className={`border cursor-pointer rounded px-4 py-3  text-center md:text-lg w-[32%] mt-1.5 ${Number(obj.quantity) === 0 ? "cursor-not-allowed bg-black/[0.1] opacity-50" : "hover:border-black"} ${sizeSelected === obj.size ? "border-black" : ""}`}>{obj.size}</li>)}
+          {product.sizes?.map(obj => <li key={obj._id} onClick={() => setSizeSelected(obj.size)} className={`border cursor-pointer rounded px-4 py-3  text-center md:text-lg w-[32%] mt-1.5 ${Number(obj.quantity) === 0 ? "cursor-not-allowed pointer-events-none bg-black/[0.1] opacity-50" : "hover:border-black"} ${sizeSelected === obj.size ? "border-black" : ""}`}>{obj.size}</li>)}
           </ul>
 
     
