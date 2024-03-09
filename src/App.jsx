@@ -21,7 +21,7 @@ import ResetPassword from "./pages/ResetPassword.jsx";
 axios.defaults.withCredentials = true;
 // axios.defaults.baseURL = "http://localhost:4001/api"
 axios.defaults.baseURL = "https://sneakerx-backend.onrender.com/api"
-// axios.defaults.baseURL = "https://dtpvm8nd-4001.inc1.devtunnels.ms/api"
+
 
 const Layout = () => {
   return (

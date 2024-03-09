@@ -21,7 +21,7 @@ function Checkout() {
     productId: ele.product._id,
     count: ele.count,
     size: ele.size,
-    price: ele.product.sellingPrice,
+    price: +ele.product.sellingPrice,
   }));
 
   const handlePayment = async (e) => {

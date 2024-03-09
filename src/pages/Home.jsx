@@ -15,17 +15,16 @@ function Home() {
     <div>
       <Container className={`px-4 sm:px-6 xl:px-2`}>
         {/* Category grid start */}
-        <div>
+        <div className="h-[40vw] min-h-[200px] md:max-h-[500px]">
           <h2 className="text-[20px] md:text-[24px] font-[500] my-6">The Collections</h2>
           <div className="flex overflow-auto gap-2 md:gap-7 mb-5">
           {!categoryList && <div className="flex overflow-auto gap-2 md:gap-7 mb-5">
             {/* simmer ui start */}
-              {[...Array(3)].map((el, i) => <div key={i} className="bg-[#F6F6F6] h-[140px] md:h-[360px] min-w-[9rem] w-[33vw]"></div>)}
+              {[...Array(3)].map((el, i) => <div key={i} className="bg-[#F6F6F6] h-[30vw] max-h-[410px] min-w-[9rem] w-[33vw]"></div>)}
               {/* simmer ui end */}
             </div>  }
 
-            {categoryList?.map(category => <CategoryCard key={category._id} category={category} />)
-          }
+            {categoryList?.map(category => <CategoryCard key={category._id} category={category} />)}
           
          </div>
         </div>

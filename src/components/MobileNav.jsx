@@ -53,7 +53,7 @@ function MobileNav() {
           <Link
             onClick={toggleNav}
             className="font-[500] text-[24px] cursor-pointer flex items-center justify-between"
-            to="/about"
+            to="/#"
           >
             About <GrNext className="text-xl" />
           </Link>
@@ -70,7 +70,7 @@ function MobileNav() {
           <Link
             onClick={toggleNav}
             className="font-[500] text-[24px] cursor-pointer flex items-center justify-between"
-            to="/contact"
+            to="/#"
           >
             Contact <GrNext className="text-xl" />
           </Link>
