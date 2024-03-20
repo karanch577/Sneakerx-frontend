@@ -8,6 +8,8 @@ This is an e-commerce application built using the MERN stack - MongoDB, Express,
 
 ### This is the frontend repository of the project. You can find the backend of this project [here](https://github.com/karanch577/Sneakerx-backend).
 
+### Sneakerx Admin Dashboard Repo [here](https://github.com/karanch577/Sneakerx-admin).
+
 ## Demo Users
 
 ### User: 
