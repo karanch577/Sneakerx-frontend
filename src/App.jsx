@@ -22,7 +22,7 @@ axios.defaults.withCredentials = true;
 // axios.defaults.baseURL = "http://localhost:4001/api"
 // axios.defaults.baseURL = "https://sneakerx-backend.onrender.com/api"
 // axios.defaults.baseURL = "https://sneakerx-backend-production.up.railway.app/api"
-axios.defaults.baseURL = "https://www.sneakerx.xyz/api"
+axios.defaults.baseURL = "https://sneakerx.xyz/api"
 
 
 const Layout = () => {
